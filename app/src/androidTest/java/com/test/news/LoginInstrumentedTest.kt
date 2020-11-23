@@ -3,6 +3,7 @@ package com.test.news
 import androidx.test.rule.ActivityTestRule
 import junit.framework.Assert.assertTrue
 import com.test.news.features.login.presentation.*
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
@@ -14,6 +15,11 @@ class LoginInstrumentedTest {
     var loginScreen = LoginScreen()
     var newsScreen = NewsScreen()
     var utils = Utils()
+
+    @Before
+    fun wifiAndDataIsEnabled() {
+        utils.enableWifiAndData()
+    }
 
     @Test
     fun loggedOutUserOpensAppForFirstTime() {

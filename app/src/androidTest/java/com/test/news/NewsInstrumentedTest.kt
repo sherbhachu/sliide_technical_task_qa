@@ -1,6 +1,5 @@
 package com.test.news
 
-import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.rule.ActivityTestRule
 import com.test.news.features.login.presentation.LoginActivity
 import com.test.news.features.login.presentation.LoginScreen
@@ -18,9 +17,6 @@ class NewsInstrumentedTest {
     var activityTestRule = ActivityTestRule<LoginActivity>(
         LoginActivity::class.java)
 
-    //var newsScreenTestRule = ActivityTestRule<NewsActivity>(
-    //    NewsActivity::class.java)
-
     var loginScreen = LoginScreen()
     var newsScreen = NewsScreen()
     var utils = Utils()
@@ -28,7 +24,6 @@ class NewsInstrumentedTest {
     @Before
     fun userLoginSucceeds() {
         utils.enableWifiAndData()
-        loginScreen.loginAsValidUser()
     }
 
     @After
@@ -38,7 +33,8 @@ class NewsInstrumentedTest {
 
     @Test
     fun newsImagesAreLoadedForLoggedInUser() {
-        //newsScreen.repeatUntil { activityTestRule.activity.isFinishing }
+        loginScreen.loginAsValidUser()
+        loginScreen.repeatUntil { activityTestRule.activity.isFinishing }
         newsScreen.newsScreenIsDisplayed()
         newsScreen.hasNewsImagesVisible()
     }
@@ -46,14 +42,16 @@ class NewsInstrumentedTest {
     @Test
     fun newsImagesFailedToLoadDueToNetworkConnection() {
         utils.disableWifiAndData()
-        //newsScreen.repeatUntil { activityTestRule.activity.isFinishing }
+        loginScreen.loginAsValidUser()
+        loginScreen.repeatUntil { activityTestRule.activity.isFinishing }
         newsScreen.newsScreenIsDisplayed()
         newsScreen.failedToLoadNewsMessageIsSeen()
     }
 
     @Test
     fun newsImageIsClickedAndUserIsNavigatedToExternalBrowser() {
-        //newsScreen.repeatUntil { activityTestRule.activity.isFinishing }
+        loginScreen.loginAsValidUser()
+        loginScreen.repeatUntil { activityTestRule.activity.isFinishing }
         newsScreen.newsScreenIsDisplayed()
         newsScreen.hasNewsImagesVisible()
         newsScreen.clickOnFirstNewsImageWhenVisible()

@@ -23,6 +23,7 @@ class Utils : BaseScreen() {
 
     fun enableWifiAndData() {
         sendShellCommand("svc wifi enable", "svc data enable")
+        Thread.sleep(1000)
     }
 
     fun disableWifiAndData() {
