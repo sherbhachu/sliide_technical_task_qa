@@ -1,0 +1,43 @@
+Manual Tests:
+
+User is at the login screen...
+
+- Login screen looks visually complete - when trying on smaller devices / tablet
+- Login with a valid username/password - user is sent to the News screen (logged in successfully)
+- Login with a valid username/invalid password - should not be logged in, some form of messaging
+- Login with a valid password/invalid username - should not be logged in, some form of messaging
+- Login with an invalid format for username (valid password) - should not be logged in, some form of messaging
+- Enter username and password and rotate device - values are still kept and not erased.
+- Rotate device whilst signing in (valid username and password) - User is logged in successfully
+- Attempt to login using different locale/region (Testing double byte characters and such)
+
+
+Assume user is successfully logged in...
+- User presses back and they are taken out of the application (not back to the login screen)
+- Given there is no network connectivity or some error has occurred loading the feed - user is shown an error message
+- Given there is poor network connectivity - the tiles are seen loading slowly (or user is at least shown a spinner whilst they load, the UI is still responsive)
+- Large list is returned by the endpoint - device storage runs out as the images are loading (behaviour TBC?)
+- No data returned from feed - no error is shown but the user is at the News screen, swiping does not do anything
+- Invalid data returned from feed - no error is shown but the user is at the News screen, swiping does not do anything
+- News 'tile' is returned the but the data is incomplete (missing link information) - User clicks on tile, but nothing happens
+- View has many tiles loaded - user is able to swipe up/down the list ... the app does not crash.
+- View has many tiles loaded - user is able to swipe up/down the list and they send the app to the background and resume
+    ...the app does not crash and the user is returned to the same position in the list prior to sending the app to the background
+- News 'tile' is returned with all data - User clicks on tile, user is taken to the configured browser (assuming one has been setup, otherwise they are prompted)
+
+List verification...
+- List may have duplicate items contained within it (i.e. duplicate image and/or same/different link to article)
+
+Assume user is successfully logged in and has clicked on a tile where there are now at a browser...
+- User is able to navigate back and is taken to the list of News tiles (assuming Feed data has not changed since)
+- User is able to navigate back and is taken to an empty news list (assuming Feed data has changed since)
+- User is able to navigate back and is taken to a News screen with an error message (assuming Feed data endpoint is now not valid or not returning data)
+
+
+Other variations:
+ - Different default browser configured (other than Chrome)
+ - Different network connectivity (2G, 3G, High latency, etc)
+ - Different devices and formats (different O/S versions, screen sizes, tablets, etc)
+ - Availability of space on device (insufficient, sufficient)
+
+
